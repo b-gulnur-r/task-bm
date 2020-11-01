@@ -2,7 +2,7 @@ export const SEARCH_CREW = "SEARCH_CREW"
 export const ADD_MY_ADDRESS = "ADD_MY_ADDRESS"
 export const CREATE_ORDER = "CREATE_ORDER"
 
-export function searchCrew (data: any) {
+export function searchCrew (data: CrewInfoType[]) {
     return {
         type: SEARCH_CREW,
         payload: data,

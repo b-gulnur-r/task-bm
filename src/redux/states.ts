@@ -67,7 +67,7 @@ export let data: DataTypes = {
       lon: 53.216509,
     },
   ],
-  recommendedCrew: undefined,
+  recommendedCrew: [],
   myOrders: undefined,
   myAddress: undefined,
 }

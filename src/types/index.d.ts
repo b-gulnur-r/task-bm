@@ -30,7 +30,7 @@ interface CrewInfoType {
 
 interface DataTypes {
     crewInfo: CrewInfoType[]
-    recommendedCrew: CrewInfoType[] | undefined
+    recommendedCrew: CrewInfoType[]
     myOrders: MyOrdersType | undefined
     myAddress: MyAddressType | undefined
 }
