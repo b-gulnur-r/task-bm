@@ -1,14 +1,39 @@
-import React from "react"
+import React, { ReactElement, useEffect } from "react"
 import styled from "styled-components"
+import { CrewCard } from "../../crew/crew-card"
+import { Grid } from "../../ui/grid"
 
-const Container = styled.div`
-  padding: 16px 0px;
+const Label = styled.span`
+  text-align: right;
 `
 
-export const SuitableCrew = () => {
+interface Props {
+  selectedCrew: CrewInfoType
+  change: any
+}
+
+export const SuitableCrew = ({ selectedCrew, change }: Props): ReactElement => {
+  useEffect(() => {
+    selectedCrew && change("crew_id", selectedCrew.crew_id)
+  })
+
   return (
-    <Container>
-      <div>Подходящий экипаж: -</div>
-    </Container>
+    <Grid>
+      {selectedCrew && (
+        <>
+          <Label>Подходящий экипаж: </Label>
+          <CrewCard
+            style={{
+              border: "1px solid black",
+              width: 300,
+              padding: 10,
+              borderRadius: 5,
+            }}
+            {...selectedCrew}
+            isShowNumberOfCar={true}
+          />
+        </>
+      )}
+    </Grid>
   )
 }

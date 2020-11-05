@@ -13,7 +13,7 @@ interface AddressesType{
 interface MyOrdersType {
     source_time: string
     addresses: AddressesType
-    crew_id: string
+    crew_id: number
 }
 
 interface CrewInfoType {

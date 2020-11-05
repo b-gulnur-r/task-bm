@@ -1,43 +1,42 @@
-import React, { ReactElement } from "react"
+import React, { Dispatch, ReactElement, SetStateAction } from "react"
+import { Field } from "react-final-form"
 import styled from "styled-components"
-import { SvgTaxi } from "../ui/icons/taxi"
+import { CrewCard } from "./crew-card"
 
 interface Props {
   crew: CrewInfoType[]
+  setSelectedCrew: Dispatch<SetStateAction<CrewInfoType | undefined>>
+  change: any
 }
 
 const Container = styled.div`
-  flex: .5 1;
+  flex: 0.5 1;
   margin-left: 16px;
   border: 1px solid black;
 `
 
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom:  1px solid black;
-`
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 16px;
-`
-
-export const CrewList = ({ crew }: Props): ReactElement => {
+export const CrewList = ({
+  crew,
+  setSelectedCrew,
+  change,
+}: Props): ReactElement => {
   return (
     <Container>
-      {crew.map((item) => {
-          const name = `${item.car_mark} ${item.car_model}`
-        return (
-          <Row key={item.crew_id}>
-            <SvgTaxi />
-            <Column>
-              <div>{name}</div>
-              <div>{item.car_color}</div>
-            </Column>
-          </Row>
-        )
-      })}
+      {crew.map((item) => (
+        <Field  key={item.crew_id} style={{ flex: 1 }} name="crew_id">
+          {() => {
+            return (
+              <CrewCard
+                onClick={() => {
+                  setSelectedCrew(item)
+                  change("crew_id", item.crew_id)
+                }}
+                {...item}
+              />
+            )
+          }}
+        </Field>
+      ))}
     </Container>
   )
 }

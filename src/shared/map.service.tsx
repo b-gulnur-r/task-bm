@@ -1,16 +1,15 @@
+import { replace } from "lodash"
 import { YMapsApi } from "react-yandex-maps"
 import { suggestOptions } from "./map.config"
 
 interface addEventSuggestViewProps {
   ymaps: YMapsApi
-  fun: (props: string) => void
-  addMyAddress: (obj: MyAddressType) => void
+  handlerAddMyAddress: (obj: AddressesType) => void
 }
 
 export const addEventSuggest = ({
   ymaps,
-  fun,
-  addMyAddress,
+  handlerAddMyAddress,
 }: addEventSuggestViewProps) => {
   const suggestView = new ymaps.SuggestView("suggest", suggestOptions)
   suggestView.events.add("select", (e: any) => {
@@ -22,11 +21,12 @@ export const addEventSuggest = ({
         var firstGeoObject = res.geoObjects.get(0),
           coords = firstGeoObject.geometry.getCoordinates()
 
-        fun(firstGeoObject.getAddressLine())
-        addMyAddress({
-          id: "1",
-          address: firstGeoObject.getAddressLine(),
-          coords: coords,
+        const formatedAddress = replace(firstGeoObject.getAddressLine(), 'Россия, Удмуртская Республика, Ижевск, ', '')
+
+        handlerAddMyAddress({
+          address: formatedAddress,
+          lat: coords[0],
+          lon: coords[1],
         })
       })
   })
@@ -80,15 +80,10 @@ export const getObjSortByDistance = ({
   })
 }
 
-interface funProps {
-  obj: MyAddressType
-  address: string
-}
-
 interface getAddressByCoordsProps {
   ymaps: YMapsApi
   coords: number[]
-  fun : (props: funProps) => void
+  fun : (obj: AddressesType) => void
 }
 
 export const getAddressByCoords = ({ ymaps, coords, fun }: getAddressByCoordsProps) => {
@@ -102,18 +97,14 @@ export const getAddressByCoords = ({ ymaps, coords, fun }: getAddressByCoordsPro
         "metaDataProperty.GeocoderMetaData.text",
         ""
       )
-      fun({
-        obj: {
-          id: "1",
-          address,
-          coords: geometry.getCoordinates(),
-        },
-        address,
 
+      const formatedAddress = replace(address, 'Россия, Удмуртская Республика, Ижевск, ', '')
+      fun({
+        address: formatedAddress,
+        lat: geometry.getCoordinates()[0],
+        lon: geometry.getCoordinates()[1],
       })
     }
   })
-  .catch((error: any) => {
-    // console.log(error)
-  })
+  .catch(() => { })
 }
