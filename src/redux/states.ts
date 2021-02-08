@@ -8,7 +8,7 @@ export const data: DataTypes = {
       car_number: "Е234КУ",
       driver_name: "Деточкин",
       driver_phone: "7788",
-      lat:56.853601,
+      lat: 56.853601,
       lon: 53.198869,
     },
     {
@@ -19,7 +19,7 @@ export const data: DataTypes = {
       car_number: "Ф567АС",
       driver_name: "Петров",
       driver_phone: "8899",
-      lat: 56.856146, 
+      lat: 56.856146,
       lon: 53.202022,
     },
     {
@@ -30,7 +30,7 @@ export const data: DataTypes = {
       car_number: "Ф567АС",
       driver_name: "Иванов",
       driver_phone: "8899",
-      lat: 56.857897, 
+      lat: 56.857897,
       lon: 53.210717,
     },
     {
@@ -41,7 +41,7 @@ export const data: DataTypes = {
       car_number: "Ф567АС",
       driver_name: "Алексеев",
       driver_phone: "8899",
-      lat: 56.865235, 
+      lat: 56.865235,
       lon: 53.209427,
     },
     {
@@ -63,11 +63,11 @@ export const data: DataTypes = {
       car_number: "Ф567АС",
       driver_name: "Семенов",
       driver_phone: "8899",
-      lat: 56.878015, 
+      lat: 56.878015,
       lon: 53.216509,
     },
   ],
   recommendedCrew: [],
   myOrders: undefined,
   myAddress: undefined,
-}
+};

@@ -1,19 +1,22 @@
-import React, { Dispatch, ReactElement, SetStateAction } from "react"
-import { Field } from "react-final-form"
-import styled from "styled-components"
-import { CrewCard } from "./crew-card"
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
+import { Field } from "react-final-form";
+import styled from "styled-components";
+import { CrewCard } from "./crew-card";
 
 interface Props {
-  crew: CrewInfoType[]
-  setSelectedCrew: Dispatch<SetStateAction<CrewInfoType | undefined>>
-  change: any
+  crew: CrewInfoType[];
+  setSelectedCrew: Dispatch<SetStateAction<CrewInfoType | undefined>>;
+  change: (
+    name: "crew_id" | "addresses" | "source_time",
+    value: number,
+  ) => void;
 }
 
 const Container = styled.div`
   flex: 0.5 1;
   margin-left: 16px;
   border: 1px solid black;
-`
+`;
 
 export const CrewList = ({
   crew,
@@ -23,20 +26,20 @@ export const CrewList = ({
   return (
     <Container>
       {crew.map((item) => (
-        <Field  key={item.crew_id} style={{ flex: 1 }} name="crew_id">
+        <Field key={item.crew_id} style={{ flex: 1 }} name="crew_id">
           {() => {
             return (
               <CrewCard
                 onClick={() => {
-                  setSelectedCrew(item)
-                  change("crew_id", item.crew_id)
+                  setSelectedCrew(item);
+                  change("crew_id", item.crew_id);
                 }}
                 {...item}
               />
-            )
+            );
           }}
         </Field>
       ))}
     </Container>
-  )
-}
+  );
+};

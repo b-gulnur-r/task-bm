@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react"
-import styled from "styled-components"
+import React, { ReactElement } from "react";
+import styled from "styled-components";
 
 interface Props {
-  children: ReactElement
+  children: ReactElement;
 }
 
 const View = styled.div`
@@ -10,8 +10,8 @@ const View = styled.div`
   grid-template-columns: 20% 80%;
   grid-gap: 10px;
   margin-bottom: 20px;
-`
+`;
 
 export const Grid = ({ children }: Props): ReactElement => {
-  return <View>{children}</View>
-}
+  return <View>{children}</View>;
+};

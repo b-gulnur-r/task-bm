@@ -1,26 +1,25 @@
-import React, { ReactElement } from "react"
-import styled from "styled-components"
-import { SvgTaxi } from "../ui/icons/taxi"
-import { NumberOfCar } from "./number-of-car"
+import React, { FC, ReactElement, StyleHTMLAttributes } from "react";
+import styled from "styled-components";
+import { SvgTaxi } from "../ui/icons/taxi";
+import { NumberOfCar } from "./number-of-car";
 
 const Row = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid black;
-`
+`;
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 16px;
-`
+`;
 
-type Props = CrewInfoType & {
-  onClick?: () => void
-  style?: any
-  isShowNumberOfCar?: boolean
-}
+type PropsCrewCard = CrewInfoType &
+  StyleHTMLAttributes<HTMLDivElement> & {
+    isShowNumberOfCar?: boolean;
+  };
 
-export const CrewCard = ({
+export const CrewCard: FC<PropsCrewCard> = ({
   style,
   onClick,
   car_mark,
@@ -28,13 +27,16 @@ export const CrewCard = ({
   car_color,
   car_number,
   isShowNumberOfCar,
-}: Props): ReactElement => (
+}: PropsCrewCard): ReactElement => (
   <Row onClick={onClick} style={style}>
     <SvgTaxi />
     <Column>
       <div>{`${car_mark} ${car_model}`}</div>
       <div>{car_color}</div>
-      {isShowNumberOfCar && <NumberOfCar numberOfCar={car_number} />}
+      <NumberOfCar
+        numberOfCar={car_number}
+        style={{ display: isShowNumberOfCar ? "block" : "none" }}
+      />
     </Column>
   </Row>
-)
+);

@@ -1,30 +1,43 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import { Grid } from "./grid"
+import React, { FC, useState, ChangeEvent } from "react";
+import styled from "styled-components";
+import { Grid } from "./grid";
 
 const Label = styled.span`
   text-align: right;
-`
+`;
 
-export const Input = ({ errorMessage, value, onChangeData, ...props }: any) => {
-  const [value1, setValue] = useState(value || "")
+interface InputProps {
+  errorMessage: string;
+  value: string;
+  onChangeData: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const Input: FC<InputProps> = ({
+  errorMessage,
+  value,
+  onChangeData,
+  ...props
+}: InputProps) => {
+  const [suggestValue, setSuggestValue] = useState(value || "");
   return (
     <Grid>
       <>
         <Label>Откуда:</Label>
         <input
           {...props}
-          value={value1}
+          value={suggestValue}
           style={{ flex: 1, width: 500 }}
           className="form-control"
           id="suggest"
           onChange={(e) => {
-            onChangeData(e)
-            setValue(e.target.value)
+            onChangeData(e);
+            setSuggestValue(e.target.value);
           }}
         />
-        {errorMessage && <span className="errorMessage">{errorMessage}</span>}
+        {errorMessage && (
+          <span className="errorMessage">{errorMessage}</span>
+        )}
       </>
     </Grid>
-  )
-}
+  );
+};
