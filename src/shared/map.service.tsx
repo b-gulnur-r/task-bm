@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { YMapsApi } from "react-yandex-maps";
 import { suggestOptions } from "./map.config";
 

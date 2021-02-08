@@ -3,6 +3,7 @@ import { YMaps } from "react-yandex-maps";
 import { CreateOrderForm } from "./components/create-order/create-order.form";
 import { mapProviderProps } from "./shared/map.config";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {
   return (
     <YMaps {...mapProviderProps}>

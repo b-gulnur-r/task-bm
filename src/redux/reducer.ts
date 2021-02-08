@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SEARCH_CREW, ADD_MY_ADDRESS, CREATE_ORDER } from "./actions";
 import { data } from "./states";
 

@@ -121,6 +121,7 @@ const CreateOrder = ({ ymaps }: Props): React.ReactElement => {
     return errors;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function renderInput({ input, meta, change }: any) {
     return (
       <Input

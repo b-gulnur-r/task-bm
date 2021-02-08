@@ -4,7 +4,7 @@ export const CREATE_ORDER = "CREATE_ORDER";
 
 interface ActionProps {
   type: string;
-  payload: any;
+  payload: unknown;
 }
 
 export function searchCrew(data: CrewInfoType[]): ActionProps {
