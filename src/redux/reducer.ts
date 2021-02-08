@@ -1,7 +1,7 @@
 import { SEARCH_CREW, ADD_MY_ADDRESS, CREATE_ORDER } from "./actions"
 import { data } from "./states"
 
-export let reducer = (state: DataTypes = data, action: any) => {
+export const reducer = (state: DataTypes = data, action: any) => {
   switch (action.type) {
     case SEARCH_CREW:
       return { ...state, recommendedCrew: action.payload }

@@ -36,7 +36,7 @@ const Title = styled.p`
 
 const CreateOrder = ({ ymaps }: Props): React.ReactElement => {
   const dispatch = useDispatch()
-  let data: DataTypes = useSelector((state: any) => state)
+  const data: DataTypes = useSelector((state: any) => state)
   const [selectedCrew, setSelectedCrew] = useState<CrewInfoType>()
 
   const getSuitableCrews = (recommendedCrew: CrewInfoType[]) => {
@@ -83,7 +83,7 @@ const CreateOrder = ({ ymaps }: Props): React.ReactElement => {
     )
   }
 
-  const onSubmit = async (values: MyOrdersType): Promise<void> => {
+  const onSubmit = (values: MyOrdersType): void => {
     dispatch(createOrder(values))
   }
 

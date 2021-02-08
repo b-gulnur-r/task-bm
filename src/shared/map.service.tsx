@@ -1,4 +1,3 @@
-import { replace } from "lodash"
 import { YMapsApi } from "react-yandex-maps"
 import { suggestOptions } from "./map.config"
 
@@ -18,13 +17,11 @@ export const addEventSuggest = ({
         results: 1,
       })
       .then(function (res: any) {
-        var firstGeoObject = res.geoObjects.get(0),
+        const firstGeoObject = res.geoObjects.get(0),
           coords = firstGeoObject.geometry.getCoordinates()
 
-        const formatedAddress = replace(firstGeoObject.getAddressLine(), 'Россия, Удмуртская Республика, Ижевск, ', '')
-
         handlerAddMyAddress({
-          address: formatedAddress,
+          address: firstGeoObject.getAddressLine(),
           lat: coords[0],
           lon: coords[1],
         })
@@ -58,7 +55,7 @@ export const getObjSortByDistance = ({
     }
   })
 
-  var result = ymaps
+  const result = ymaps
     .geoQuery({
       type: "FeatureCollection",
       features: tempTaxi,
@@ -67,15 +64,13 @@ export const getObjSortByDistance = ({
 
   result.then(function () {
     const recommendedCrew: CrewInfoType[] = []
-    let i = 0
-    while (result.getLength() > i && i < 4) {
-      const coord = result.get(i).geometry.getCoordinates()
+    result.each((item: any) => {
+      const coord =  item.geometry.getCoordinates()
       const currentCrew = crewInfo.find((item) => {
         return item.lat === coord[0] && item.lon === coord[1]
       })
       currentCrew && recommendedCrew.push(currentCrew)
-      i++
-    }
+    })
     getSuitableCrews(recommendedCrew)
   })
 }
@@ -98,9 +93,8 @@ export const getAddressByCoords = ({ ymaps, coords, fun }: getAddressByCoordsPro
         ""
       )
 
-      const formatedAddress = replace(address, 'Россия, Удмуртская Республика, Ижевск, ', '')
       fun({
-        address: formatedAddress,
+        address: address,
         lat: geometry.getCoordinates()[0],
         lon: geometry.getCoordinates()[1],
       })

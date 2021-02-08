@@ -1,4 +1,4 @@
-export let data: DataTypes = {
+export const data: DataTypes = {
   crewInfo: [
     {
       crew_id: 1,
